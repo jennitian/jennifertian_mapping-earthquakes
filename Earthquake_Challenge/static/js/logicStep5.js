@@ -55,9 +55,6 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 // This function returns the style data for each of the earthquakes we plot on
 // the map. We pass the magnitude of the earthquake into a function
 // to calculate the radius.
-// This function determines the radius of the earthquake marker based on its magnitude.
-// Earthquakes with a magnitude of 0 will be plotted with a radius of 1.
-
 function styleInfo(feature) {
 	return {
 	  opacity: 1,
@@ -69,6 +66,7 @@ function styleInfo(feature) {
 	  weight: 0.5
 	};
   }
+
 // This function determines the color of the circle based on the magnitude of the earthquake.
 function getColor(magnitude) {
 	if (magnitude > 5) {
@@ -88,6 +86,9 @@ function getColor(magnitude) {
 	}
 	return "#98ee00";
   }
+
+// This function determines the radius of the earthquake marker based on its magnitude.
+// Earthquakes with a magnitude of 0 will be plotted with a radius of 1.
 function getRadius(magnitude) {
 	if (magnitude === 0) {
 	  return 1;
@@ -140,18 +141,17 @@ L.geoJson(data, {
 
 });
 
-// Retrieve the earthquake GeoJSON data.
+// Retrieve the tectonic plates data.
 d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
 
-L.geoJson(data, {
-	color: "#EF2A00",
-	weight: 2,
-    pointToLayer: function(feature, latlng) {
-        console.log(data);
-        return L.polyline(latlng);
-      },
-    // We create a popup for each circleMarker to display the magnitude and
-    //  location of the earthquake after the marker has been created and styled.
-}).addTo(tectonic);
-tectonic.addTo(map);
+	L.geoJson(data, {
+		color: "#EF2A00",
+		weight: 2,
+		pointToLayer: function(feature, latlng) {
+			console.log(data);
+			return L.polyline(latlng);
+		},
+
+	}).addTo(tectonic);
+	tectonic.addTo(map);
 })
