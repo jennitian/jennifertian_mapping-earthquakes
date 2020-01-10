@@ -144,7 +144,7 @@ L.geoJson(data, {
 d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
 
 L.geoJson(data, {
-	color: "#FF0000",
+	color: "#EF2A00",
 	weight: 2,
     pointToLayer: function(feature, latlng) {
         console.log(data);
